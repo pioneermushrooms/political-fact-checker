@@ -133,7 +133,8 @@ export default function Home() {
   const categoryChartData = Object.entries(metrics.categoryDistribution)
     .map(([name, value]) => ({ name, value, fill: CATEGORY_COLORS[name] || "#6B7280" }));
 
-  const falseCount = useCountUp(metrics.falseRate, 1400, 200);
+  const falseRateCount = useCountUp(metrics.falseRate, 1400, 200);
+  const truthRateCount = useCountUp(metrics.truthRate, 1400, 300);
   const totalCount = useCountUp(metrics.totalReports, 1200, 0);
   const followUpCount = useCountUp(metrics.followUpRequired, 1200, 400);
 
@@ -192,17 +193,23 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid grid-cols-3 gap-3 lg:gap-4"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4"
             >
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20">
                 <div className="text-3xl font-bold text-white" style={{ fontFamily: "'Sora', sans-serif" }}>
                   {totalCount}
                 </div>
-                <div className="text-xs text-white/60 mt-1 font-medium">Reports</div>
+                <div className="text-xs text-white/60 mt-1 font-medium">Total Reports</div>
+              </div>
+              <div className="bg-emerald-500/20 backdrop-blur-sm rounded-xl p-4 text-center border border-emerald-400/30">
+                <div className="text-3xl font-bold text-emerald-300" style={{ fontFamily: "'Sora', sans-serif" }}>
+                  {truthRateCount}%
+                </div>
+                <div className="text-xs text-emerald-300/80 mt-1 font-medium">Truth Rate</div>
               </div>
               <div className="bg-red-500/20 backdrop-blur-sm rounded-xl p-4 text-center border border-red-400/30">
                 <div className="text-3xl font-bold text-red-300" style={{ fontFamily: "'Sora', sans-serif" }}>
-                  {falseCount}%
+                  {falseRateCount}%
                 </div>
                 <div className="text-xs text-red-300/80 mt-1 font-medium">False/Mostly False</div>
               </div>
